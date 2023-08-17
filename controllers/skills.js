@@ -4,12 +4,20 @@ module.exports = {
   index,
   show,
   new: newSkill,
-  create
+  create,
+  delete: deleteSkill
 };
+
+function deleteSkill(req, res) {
+  Skill.deleteOne(req.params.id);
+  res.redirect('/todos');
+}
+
 
 function create(req, res) {
   console.log(req.body);
   // model responsible for crudding data
+  Skill.create(req.body);
   // do a redirect anytime data is changed
   res.redirect('/skills');
 }
