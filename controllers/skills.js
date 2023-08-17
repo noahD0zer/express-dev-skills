@@ -1,19 +1,27 @@
 const Skill = require('../models/skill');
 
 module.exports = {
-    index
+  index,
+  show,
+  new: newSkill,
+  create
 };
 
-function index(req, res) {
-  try {
-      const skills = Skill.getAll();
-      res.render('skills/index', {
-          skills: skills
-      });
-  } catch (error) {
-      console.error('Error:', error);
-      res.status(500).send('Internal Server Error');
-  }
+function create(req, res) {
+  console.log(req.body);
+  // model responsible for crudding data
+  // do a redirect anytime data is changed
+  res.redirect('/skills');
+}
+
+function newSkill(req, res) {
+  res.render('skills/new', { title: 'New Skill' });
+}
+
+function show(req, res) {
+  res.render('skills/show', {
+    skill: Skill.getOne(req.params.id),
+  });
 }
 
 function index(req, res) {
@@ -21,7 +29,6 @@ function index(req, res) {
   const skills = Skill.getAll();
   console.log('Skills:', skills);
   res.render('skills/index', {
-      skills: skills
+    skills: skills
   });
 }
-

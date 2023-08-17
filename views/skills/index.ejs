@@ -7,16 +7,26 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 <body>
+    <%- include('../partials/header') %>
     <h1>Skills</h1>
+
+
+
     <ul>
       <% skills.forEach(function(t) { %>
         <li>
-          <%= t.todo %>
-            - 
-          <%= t.done ? '✅' : '❌' %>
+            <a href="/skills/<%= t.id %>"><%= t.skill %></a>
+
+            -
+             
+          <%= t.have ? '✅' : '❌' %>
         </li>
       <% }); %>
     </ul>
+
+
+
+    <a href="/skills/new">Add Skill</a>
   </body>
 
 </html>
